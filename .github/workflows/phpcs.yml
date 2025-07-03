@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-composer-
 
     - name: Install dependencies
-      run: composer install --no-dev --prefer-dist --no-progress
+      run: composer install --prefer-dist --no-progress
 
     - name: Run PHP CodeSniffer
       run: phpcs --standard=ruleset.xml src
