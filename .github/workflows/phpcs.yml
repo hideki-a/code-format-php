@@ -30,8 +30,5 @@ jobs:
     - name: Install dependencies
       run: composer install --no-dev --prefer-dist --no-progress
     
-    - uses: thenabeel/action-phpcs@v8
-      with:
-        files: "**.php" # you may customize glob as needed
-        phpcs_path: php phpcs.phar
-        standard: phpcs.xml
+    - name: Run PHP CodeSniffer
+      run: ./vendor/bin/phpcs --standard=ruleset.xml src
