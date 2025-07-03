@@ -30,5 +30,8 @@ jobs:
     - name: Install dependencies
       run: composer install --no-dev --prefer-dist --no-progress
     
-    - name: Run PHP CodeSniffer
-      run: composer run phpcs -- --standard=ruleset.xml .
+    - uses: thenabeel/action-phpcs@v8
+      with:
+        files: "**.php" # you may customize glob as needed
+        phpcs_path: php phpcs.phar
+        standard: phpcs.xml
