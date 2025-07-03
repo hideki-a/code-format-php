@@ -9,16 +9,16 @@ on:
 jobs:
   phpcs:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-        tools: composer:v2
-    
+        tools: composer:v2, phpcs
+
     - name: Cache Composer dependencies
       uses: actions/cache@v3
       with:
@@ -26,9 +26,9 @@ jobs:
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-composer-
-    
+
     - name: Install dependencies
       run: composer install --no-dev --prefer-dist --no-progress
-    
+
     - name: Run PHP CodeSniffer
-      run: ./vendor/bin/phpcs --standard=ruleset.xml src
+      run: phpcs --standard=ruleset.xml src
